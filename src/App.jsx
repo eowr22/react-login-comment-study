@@ -1,6 +1,6 @@
 import Header from "./Components/Header";
 import CommentBoard from "./Components/CommentBoard";
-import {useState} from "react";
+import { useState } from "react";
 
 function App() {
   const [checkLogin, setCheckLogin] = useState(false);
@@ -13,11 +13,12 @@ function App() {
       setId("");
     }
     setCheckLogin((prev) => !prev);
-  }
+  };
+
   return (
     <>
-      <Header setLogin={setLogin} id={id} checkLogin={checkLogin}/>
-      <CommentBoard checkLogin={checkLogin}/>
+      <Header setLogin={setLogin} id={id} checkLogin={checkLogin} />
+      <CommentBoard id={id} checkLogin={checkLogin} />
     </>
   );
 }
