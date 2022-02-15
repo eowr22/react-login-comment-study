@@ -11,18 +11,32 @@ const LoginBtn = styled.button``;
 
 function Header({ setLogin, id, checkLogin }) {
   const inputRef = useRef("");
+  const [input, setInput] = useState("");
 
   const onLogin = () => {
-    if (inputRef.current == null) {
-      setLogin('');
+    if (input === "") {
+      inputRef.current.focus();
+    } else if (!inputRef.current) {
+      // logout
+      setLogin("");
+      setInput("");
     } else {
+      // login
       setLogin(inputRef.current.value);
     }
   };
 
+  const onChange = (e) => {
+    setInput(e.target.value);
+  };
+
   return (
     <Container>
-      {checkLogin === false ? <LoginInput ref={inputRef} type="text" /> : id}
+      {checkLogin === false ? (
+        <LoginInput ref={inputRef} onChange={onChange} type="text" />
+      ) : (
+        id
+      )}
       <LoginBtn onClick={onLogin}>
         {checkLogin === false ? "Log In" : "Log out"}
       </LoginBtn>

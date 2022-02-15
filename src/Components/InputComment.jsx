@@ -11,6 +11,11 @@ function InputComment({ id, checkLogin, addComment }) {
   const inputRef = useRef(null);
 
   const onClick = () => {
+    if (inputRef.current.value === "") {
+      inputRef.current.focus();
+      return;
+    }
+
     const date = new Date();
 
     const input = {
