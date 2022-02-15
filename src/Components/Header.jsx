@@ -9,18 +9,15 @@ const LoginInput = styled.input``;
 
 const LoginBtn = styled.button``;
 
-function Header() {
-  const [checkLogin, setCheckLogin] = useState(false);
-  const [id, setId] = useState("");
+function Header({ setLogin, id, checkLogin }) {
   const inputRef = useRef("");
 
   const onLogin = () => {
-    if (!checkLogin) {
-      setId(inputRef.current.value);
+    if (inputRef.current == null) {
+      setLogin('');
     } else {
-      setId("");
+      setLogin(inputRef.current.value);
     }
-    setCheckLogin((prev) => !prev);
   };
 
   return (
