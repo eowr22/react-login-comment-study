@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { nanoid } from "nanoid";
+import { useComment } from "../Provider/CommentProvider";
 
 const Container = styled.div`
   display: flex;
@@ -41,10 +42,8 @@ const DeleteBtn = styled.div`
   cursor: pointer;
 `;
 
-function Comments({ id, comments, deleteComment }) {
-  function onDelete(index) {
-    deleteComment(index);
-  }
+function Comments() {
+  const { id, comments, deleteComment } = useComment();
 
   return (
     <>
@@ -58,7 +57,7 @@ function Comments({ id, comments, deleteComment }) {
                 <div>{v.date}</div>
               </CommentBox>
               {id === v.id ? (
-                <DeleteBtn onClick={() => onDelete(i)}>❌</DeleteBtn>
+                <DeleteBtn onClick={() => deleteComment(i)}>❌</DeleteBtn>
               ) : null}
             </ItemBox>
           ))}

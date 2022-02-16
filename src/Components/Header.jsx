@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useRef } from "react";
+import { useComment } from "../Provider/CommentProvider";
 
 const Container = styled.div`
   display: flex;
@@ -20,18 +21,19 @@ const LoginBtn = styled.button`
   cursor: pointer;
 `;
 
-function Header({ setLogin, id, checkLogin }) {
+function Header() {
+  const { id, setId, setLogin } = useComment();
   const inputRef = useRef("");
 
   const onLogin = () => {
     if (!inputRef.current) {
       // logout
-      setLogin("");
+      setId("");
     } else if (inputRef.current.value === "") {
       inputRef.current.focus();
     } else {
       // login
-      setLogin(inputRef.current.value);
+      setId(inputRef.current.value);
     }
   };
 
@@ -44,13 +46,13 @@ function Header({ setLogin, id, checkLogin }) {
 
   return (
     <Container>
-      {checkLogin === false ? (
+      {id === "" ? (
         <LoginInput ref={inputRef} type="text" />
       ) : (
         <Id>{id}</Id>
       )}
       <LoginBtn onClick={onLogin}>
-        {checkLogin === false ? "Log In" : "Log out"}
+        {id === "" ? "Log In" : "Log out"}
       </LoginBtn>
     </Container>
   );

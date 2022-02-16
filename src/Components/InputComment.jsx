@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useRef } from "react";
+import { useComment } from "../Provider/CommentProvider";
 
 const Container = styled.div`
   display: flex;
@@ -31,7 +32,8 @@ const CommentBtn = styled.button`
   cursor: pointer;
 `;
 
-function InputComment({ id, checkLogin, addComment }) {
+function InputComment() {
+  const { id, addComment } = useComment();
   const inputRef = useRef(null);
 
   const onClick = () => {
@@ -43,7 +45,7 @@ function InputComment({ id, checkLogin, addComment }) {
     const date = new Date();
 
     const input = {
-      id: id,
+      id,
       content: inputRef.current.value,
       date: `${date.getFullYear()}. ${
         date.getMonth() + 1
@@ -52,10 +54,9 @@ function InputComment({ id, checkLogin, addComment }) {
     addComment(input);
     inputRef.current.value = "";
   };
-
   return (
     <Container>
-      <Input ref={inputRef} disabled={!checkLogin} />
+      <Input ref={inputRef} disabled={!id} />
       <CommentBtn onClick={onClick}>Tweet</CommentBtn>
     </Container>
   );

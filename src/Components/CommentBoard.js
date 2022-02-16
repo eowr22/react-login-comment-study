@@ -1,7 +1,6 @@
 import InputComment from "./InputComment";
 import styled from "styled-components";
 import Comments from "./Comments";
-import { useState } from "react";
 
 const Container = styled.div`
   width: 50%;
@@ -11,25 +10,11 @@ const Container = styled.div`
   margin: 0 auto;
 `;
 
-function CommentBoard({ id, checkLogin }) {
-  const [comments, setComments] = useState([]);
-
-  const addComments = (newComment) => {
-    setComments((cur) => {
-      return [...cur, newComment];
-    });
-  };
-
-  const deleteComment = (index) => {
-    setComments((cur) => {
-      return cur.filter((_, i) => i !== index);
-    });
-  };
-
+function CommentBoard() {
   return (
     <Container>
-      <InputComment id={id} checkLogin={checkLogin} addComment={addComments} />
-      <Comments id={id} comments={comments} deleteComment={deleteComment} />
+      <InputComment />
+      <Comments />
     </Container>
   );
 }
