@@ -1,32 +1,70 @@
 import styled from "styled-components";
-import {nanoid} from "nanoid";
+import { nanoid } from "nanoid";
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 15px;
+  background-color: cornflowerblue;
+  width: 100%;
+`;
 
-const CommentList = styled.ul``;
+const ItemBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  height: 18vh;
+  background-color: #ffffff;
+  margin-bottom: 1rem;
+  border-radius: 15px;
+  padding: 1rem;
+`;
 
-const Item = styled.li``;
+const CommentBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
-const Name = styled.div``;
+const Name = styled.div`
+  font-size: 2rem;
+`;
 
-const Content = styled.div``;
+const Content = styled.div`
+  width: 100%;
+  font-size: 1.2rem;
+  height: 100vh;
+  overflow: hidden;
+`;
 
-const DeleteBtn = styled.button``;
+const DeleteBtn = styled.div`
+  font-size: 1.2rem;
+  cursor: pointer;
+`;
 
-function Comments({ id, comments }) {
+function Comments({ id, comments, deleteComment }) {
+  function onDelete(index) {
+    deleteComment(index);
+  }
+
   return (
-    <Container>
-      <CommentList>
-        {comments.map((v, i) => (
-          <Item key={nanoid()}>
-            <Name>{v.id}</Name>
-            <Content>{v.content}</Content>
-            <div>{v.date}</div>
-            {id === v.id ? <DeleteBtn>X</DeleteBtn> : null}
-          </Item>
-        ))}
-      </CommentList>
-    </Container>
+    <>
+      {comments.length !== 0 ? (
+        <Container>
+          {comments.map((v, i) => (
+            <ItemBox key={nanoid()}>
+              <CommentBox>
+                <Name>{v.id}</Name>
+                <Content>{v.content}</Content>
+                <div>{v.date}</div>
+              </CommentBox>
+              {id === v.id ? (
+                <DeleteBtn onClick={() => onDelete(i)}>❌</DeleteBtn>
+              ) : null}
+            </ItemBox>
+          ))}
+        </Container>
+      ) : null}
+    </>
   );
 }
 

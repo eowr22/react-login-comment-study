@@ -3,11 +3,22 @@ import { useRef } from "react";
 
 const Container = styled.div`
   display: flex;
+  justify-content: flex-end;
+  background-color: #7eb7be;
+  height: 5vh;
+  padding: 10px;
+  margin-bottom: 2rem;
 `;
 
-const LoginInput = styled.input``;
+const LoginInput = styled.input`
+  margin-right: 10px;
+`;
 
-const LoginBtn = styled.button``;
+const LoginBtn = styled.button`
+  border-style: none;
+  border-radius: 7px;
+  cursor: pointer;
+`;
 
 function Header({ setLogin, id, checkLogin }) {
   const inputRef = useRef("");
@@ -24,9 +35,20 @@ function Header({ setLogin, id, checkLogin }) {
     }
   };
 
+  const Id = styled.div`
+    font-size: 1.3rem;
+    margin-top: 4px;
+    margin-right: 10px;
+    color: white;
+  `;
+
   return (
     <Container>
-      {checkLogin === false ? <LoginInput ref={inputRef} type="text" /> : id}
+      {checkLogin === false ? (
+        <LoginInput ref={inputRef} type="text" />
+      ) : (
+        <Id>{id}</Id>
+      )}
       <LoginBtn onClick={onLogin}>
         {checkLogin === false ? "Log In" : "Log out"}
       </LoginBtn>
