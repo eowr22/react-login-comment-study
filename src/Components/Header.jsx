@@ -22,18 +22,18 @@ const LoginBtn = styled.button`
 `;
 
 function Header() {
-  const { id, setId, setLogin } = useComment();
+  const { id, saveId } = useComment();
   const inputRef = useRef("");
 
   const onLogin = () => {
     if (!inputRef.current) {
       // logout
-      setId("");
+      saveId("");
     } else if (inputRef.current.value === "") {
       inputRef.current.focus();
     } else {
       // login
-      setId(inputRef.current.value);
+      saveId(inputRef.current.value);
     }
   };
 

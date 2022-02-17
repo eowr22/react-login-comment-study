@@ -13,7 +13,7 @@ const Container = styled.div`
   margin-bottom: 1rem;
 `;
 
-const Input = styled.textarea.attrs((props) => ({
+const Input = styled.textarea.attrs(() => ({
   maxLength: "50",
 }))`
   width: 70%;
