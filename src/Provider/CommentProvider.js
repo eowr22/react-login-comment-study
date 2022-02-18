@@ -33,7 +33,7 @@ export default function CommentProvider({ children }) {
 
   return (
     <InfoContext.Provider
-      value={{ id, saveId, comments, addComment, deleteComment }}
+      value={{ id, saveId, comments, setComments, addComment, deleteComment }}
     >
       {children}
     </InfoContext.Provider>

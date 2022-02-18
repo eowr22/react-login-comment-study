@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { nanoid } from "nanoid";
 import { useComment } from "../Provider/CommentProvider";
+import { useEffect } from "react";
 
 const Container = styled.div`
   display: flex;
@@ -43,7 +44,23 @@ const DeleteBtn = styled.div`
 `;
 
 function Comments() {
-  const { id, comments, deleteComment } = useComment();
+  const { id, comments, setComments, deleteComment } = useComment();
+
+  useEffect(() => {
+    let cnt = 0;
+    setInterval(() => {
+      console.log(cnt);
+      cnt++;
+      if (cnt > 4) {
+        setComments((cur) => {
+          const temp = [...cur];
+          temp.shift();
+          return temp;
+        });
+        cnt = 0;
+      }
+    }, 1000);
+  }, []);
 
   return (
     <>
